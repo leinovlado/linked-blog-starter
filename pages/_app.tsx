@@ -2,7 +2,7 @@ import { AppProps } from 'next/app';
 import '../styles/index.css';
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import S3ComponentLoader, {
   loadS3Content,
 } from '../components/misc/S3Loader';
