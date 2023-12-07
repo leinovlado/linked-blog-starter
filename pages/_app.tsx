@@ -23,10 +23,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo></DefaultSeo>
-      <S3ComponentLoader content={pageProps.navbarContent} />
+      <S3ComponentLoader
+        className="empty"
+        content={pageProps.navbarContent}
+      />
       <Component {...pageProps} />
       <footer className="bg-neutral-50 border-t border-neutral-200">
-        <div className="">
+        <div>
           <S3ComponentLoader
             className="container mx-auto px-5"
             content={pageProps.footerContent}
