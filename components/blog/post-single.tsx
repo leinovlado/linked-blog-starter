@@ -38,10 +38,7 @@ function PostSingle({
               </header>
 
               {/* Article content */}
-              <div
-                className="lg:flex lg:justify-between"
-                data-sticky-container
-              >
+              
                 {/* Main content */}
                 <div>
                   {/* Article meta */}
