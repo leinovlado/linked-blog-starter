@@ -106,5 +106,14 @@ export function updateMarkdownLinks(markdown: string, currSlug: string) {
     }
     return m;
   });
+
+    markdown = markdown.replace(
+      /^>\[!danger\]\s*(.+)/gm,
+      (match, content) => {
+        return `<div class="custom-danger-block">${content}</div>`;
+      }
+    );
+
+  console.log(markdown);
   return markdown
 }
