@@ -17,20 +17,21 @@ const Layout = ({ children }: Props) => {
           id="simple-list-example"
           className="d-flex flex-column gap-2 simple-list-example-scrollspy"
         >
-          <a className="p-1 rounded" href="#simple-list-item-1">
-            Item 1
+          {' '}
+          <a className="p-1 rounded" href="#strategy-1">
+            Анализ рынка и конкурентов
           </a>
-          <a className="p-1 rounded" href="#simple-list-item-2">
-            Item 2
+          <a className="p-1 rounded" href="#strategy-2">
+            Разработка ценностного предложения
           </a>
-          <a className="p-1 rounded" href="#simple-list-item-3">
-            Item 3
+          <a className="p-1 rounded" href="#strategy-3">
+            Сегментация и целевая аудитория
           </a>
-          <a className="p-1 rounded" href="#simple-list-item-4">
-            Item 4
+          <a className="p-1 rounded" href="#strategy-4">
+            Маркетинговые каналы и коммуникации
           </a>
-          <a className="p-1 rounded" href="#simple-list-item-5">
-            Item 5
+          <a className="p-1 rounded" href="#strategy-5">
+            Стратегии ценообразования
           </a>
           <button
             className="w-100 btn btn-outline-primary my-2"

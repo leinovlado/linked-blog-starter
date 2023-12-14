@@ -19,7 +19,8 @@ const PostPreview = ({
 }: Props) => {
   console.log(excerpt);
   return (
-    <article className="mt-3">
+    <>
+    <article className="mt-3 pb-3 border-bottom">
             <Link as={`/${slug}`} href="/[...slug]">
       <div>
         <header>
@@ -38,7 +39,11 @@ const PostPreview = ({
         <span className="sr-only d-none">Читать...</span>
       </Link>
       </Link>
+
     </article>
+
+    </>
+
   );
 };
 
