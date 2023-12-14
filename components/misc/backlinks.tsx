@@ -18,7 +18,7 @@ const Backlinks = ({ backlinks }: Props) => {
       {Object.keys(backlinks).map((slug) => {
         const post = backlinks[slug];
         return (
-          <Card style={{ width: '18rem' }}>
+          <Card className="col-4 m-2">
             <Link
               as={slug}
               href="[...slug]"
@@ -26,12 +26,8 @@ const Backlinks = ({ backlinks }: Props) => {
             >
               <Card.Body>
                 <Card.Title>{post.title}</Card.Title>
-                <Card.Text>{post.excerpt}</Card.Text>
+                <Card.Text className='card-preview-text'>{post.excerpt}</Card.Text>
               </Card.Body>
-              <NotePreview
-                title={post.title}
-                content={post.excerpt}
-              />
             </Link>
           </Card>
         );

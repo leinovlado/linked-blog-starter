@@ -8,39 +8,41 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 type Props = {
-  title: string,
-  content: string,
-  date?: string,
-  author?: Author,
-  backlinks: { [k: string]: {
-      title: string,
-      excerpt: string,
-    }
-  }
-}
+  title: string;
+  content: string;
+  date?: string;
+  author?: Author;
+  backlinks: {
+    [k: string]: {
+      title: string;
+      excerpt: string;
+    };
+  };
+};
 
 function PostSingle({
   title,
   date,
   author,
   content,
-  backlinks
+  backlinks,
 }: Props) {
   return (
-    <section>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pt-10 pb-10">
-          <div className="max-w-3xl mx-auto lg:max-w-none">
-            <article>
-              {/* Article header */}
-              <header className="max-w-3xl mx-auto mb-2">
-                {/* Title */}
-                <h1 className="h1 text-center mb-4 text-6xl">
-                  {title}
-                </h1>
-              </header>
+    <>
+      <section className="mt-5 minh80">
+        <div className="mx-auto">
+          <div className="pt-10 pb-10">
+            <div className="max-w-3xl mx-auto lg:max-w-none">
+              <article>
+                {/* Article header */}
+                <header className="max-w-3xl mx-auto mb-2">
+                  {/* Title */}
+                  <h1 className="h1 mb-4 text-6xl">
+                    {title}
+                  </h1>
+                </header>
 
-              {/* Article content */}
+                {/* Article content */}
 
                 {/* Main content */}
                 <div>
@@ -54,19 +56,25 @@ function PostSingle({
 
                   {/* Article body */}
                   <PostBody content={content} />
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
-                    {Object.keys(backlinks).length > 0 && (
-                      <Backlinks backlinks={backlinks} />
-                    )}
-                  </div>
                 </div>
 
-              {/* Article footer */}
-            </article>
+                {/* Article footer */}
+              </article>
+            </div>
           </div>
         </div>
+      </section>
+      <div className="container mt-5">
+        {Object.keys(backlinks).length > 0 && (
+          <>
+            <h3>Также статья упоминается в:</h3>
+            <div className="row">
+              <Backlinks backlinks={backlinks} />
+            </div>
+          </>
+        )}
       </div>
-    </section>
+    </>
   );
 }
 

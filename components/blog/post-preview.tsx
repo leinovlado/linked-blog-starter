@@ -1,14 +1,14 @@
-import Link from "next/link"
-import type Author from '../../interfaces/author'
-import PostMeta from "./post-meta"
+import Link from 'next/link';
+import type Author from '../../interfaces/author';
+import PostMeta from './post-meta';
 
 type Props = {
-  title: string
-  date?: string
-  excerpt: string
-  author?: Author
-  slug: string
-}
+  title: string;
+  date?: string;
+  excerpt: string;
+  author?: Author;
+  slug: string;
+};
 
 const PostPreview = ({
   title,
@@ -17,29 +17,29 @@ const PostPreview = ({
   author,
   slug,
 }: Props) => {
+  console.log(excerpt);
   return (
-    <article >
+    <article className="mt-3">
+            <Link as={`/${slug}`} href="/[...slug]">
       <div>
         <header>
-          <h2 >
-            <Link as={`/${slug}`} href="/[...slug]" >{title}</Link>
-          </h2>
+          <h4>
+              {title}
+          </h4>
         </header>
-        <div >
-          {excerpt.slice(0, 500)}
-        </div>
-        <footer className="text-sm">
-          <PostMeta date={date} author={author} />
-        </footer>
+        <div className="post-preview-text">{excerpt}</div>
+
       </div>
-      <Link as={`/${slug}`} href="/[...slug]" className="block shrink-0 ml-6">
-        <span className="sr-only">Read more</span>
-        <svg className="w-4 h-4 fill-current text-blue-600" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9.3 14.7l-1.4-1.4L12.2 9H0V7h12.2L7.9 2.7l1.4-1.4L16 8z" />
-        </svg>
+      <Link
+        as={`/${slug}`}
+        href="/[...slug]"
+        className="block shrink-0 ml-6"
+      >
+        <span className="sr-only d-none">Читать...</span>
+      </Link>
       </Link>
     </article>
-  )
-}
+  );
+};
 
 export default PostPreview;

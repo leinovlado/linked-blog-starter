@@ -24,7 +24,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <DefaultSeo></DefaultSeo>
       <S3ComponentLoader
-        className="container"
+        className="_"
         content={pageProps.navbarContent}
       />
       <Component {...pageProps} />

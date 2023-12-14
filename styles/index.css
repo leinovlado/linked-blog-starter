@@ -31,18 +31,24 @@ p {
   line-height: 32px; /* 160% */
 }
 
-main > p:first-of-type {
+section p:first-of-type {
   color: #000;
   padding-bottom: 20px;
+  padding-top: 20px;
+
   /* Lead/Text - Regular */
   font-family: IBM Plex Sans;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
-  line-height: 38px; /* 158.333% */
+  line-height: 124%;
 }
 
 main {
+
+}
+
+main > section {
   max-width: 800px;
   margin: 0 auto;
   padding-left: 10px;
@@ -77,4 +83,42 @@ main {
 
 .preview-link:hover .note-preview {
   display: block;
+}
+
+.search-box {
+  background: rgba(255, 255, 255, 0.724);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    z-index: 100;
+}
+
+.search-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.minh80 {
+  min-height: 60vh;
+}
+
+a > div {
+  text-decoration: none !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.card-preview-text {
+  font-size: 16px;
+  line-height: 120%;
+  color: #68717A;
+}
+
+.indexing-list {
+  width: 300px;
+}
+
+.post-preview-text {
+  color: #000;
 }

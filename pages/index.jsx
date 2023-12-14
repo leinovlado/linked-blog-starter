@@ -16,7 +16,7 @@ export async function getServerSideProps() {
   return { props: { mainPage } };
 }
 
-export const home = ({ mainPage }) => {
+const index = ({ mainPage }) => {
   return (
     <div>
       <div className="container mt-5">
@@ -24,7 +24,6 @@ export const home = ({ mainPage }) => {
       </div>
     </div>
   );
-
 };
 
-export default home;
+export default index;
