@@ -80,33 +80,9 @@ export async function markdownToHtml(
       };
     })
     .use(remarkGfm)
-    .use(() => {
-      return (tree) => {
-        console.log(
-          chalk.blue('2 После remarkGfm:'),
-          JSON.stringify(tree, null, 2)
-        );
-      };
-    })
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
-    .use(() => {
-      return (tree) => {
-        console.log(
-          chalk.blue('3 После remarkRehype:'),
-          JSON.stringify(tree, null, 2)
-        );
-      };
-    })
-    .use(rehypeSanitize, mySchema)
-    .use(() => {
-      return (tree) => {
-        console.log(
-          chalk.blue('4 После rehypeSanitize:'),
-          JSON.stringify(tree, null, 2)
-        );
-      };
-    })
+    .use(rehypeSanitize)
     .use(rehypeRewrite, {
       selector: 'a',
       rewrite: async (node) =>

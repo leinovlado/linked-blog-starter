@@ -4,6 +4,9 @@ import Backlinks from '../misc/backlinks';
 import PostBody from './post-body';
 import PostMeta from './post-meta';
 
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
 type Props = {
   title: string,
   content: string,
@@ -38,7 +41,7 @@ function PostSingle({
               </header>
 
               {/* Article content */}
-              
+
                 {/* Main content */}
                 <div>
                   {/* Article meta */}

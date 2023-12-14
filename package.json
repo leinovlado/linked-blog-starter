@@ -6,6 +6,7 @@
     "dev": "next",
     "prebuild": "npm run copyimages",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "typecheck": "tsc"
   },
@@ -22,6 +23,7 @@
     "next": "latest",
     "next-seo": "^5.15.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
     "rehype-rewrite": "^3.0.6",
     "rehype-sanitize": "^5.0.1",

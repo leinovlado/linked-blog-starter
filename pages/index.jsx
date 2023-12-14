@@ -13,19 +13,18 @@ export async function getServerSideProps() {
   );
 
   // Передаем содержимое в props
-  return { props: {  mainPage } };
+  return { props: { mainPage } };
 }
 
 export const home = ({ mainPage }) => {
   return (
     <div>
-      <Header></Header>
-      <div className="container mx-auto">
+      <div className="container mt-5">
         <S3ComponentLoader content={mainPage} />
       </div>
-      <Footer></Footer>
     </div>
   );
+
 };
 
 export default home;

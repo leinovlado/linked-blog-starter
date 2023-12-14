@@ -18,14 +18,14 @@ const PostPreview = ({
   slug,
 }: Props) => {
   return (
-    <article className="flex items-center py-4 border-b border-gray-200 justify-between w-full">
+    <article >
       <div>
         <header>
-          <h2 className="h4 mb-2">
-            <Link as={`/${slug}`} href="/[...slug]" className="hover:underline">{title}</Link>
+          <h2 >
+            <Link as={`/${slug}`} href="/[...slug]" >{title}</Link>
           </h2>
         </header>
-        <div className="text-lg text-gray-600 mb-4 text-ellipsis">
+        <div >
           {excerpt.slice(0, 500)}
         </div>
         <footer className="text-sm">

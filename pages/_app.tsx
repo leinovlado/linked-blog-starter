@@ -2,7 +2,7 @@ import { AppProps } from 'next/app';
 import '../styles/index.css';
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import S3ComponentLoader, {
   loadS3Content,
 } from '../components/misc/S3Loader';
@@ -24,14 +24,14 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <DefaultSeo></DefaultSeo>
       <S3ComponentLoader
-        className="empty"
+        className="container"
         content={pageProps.navbarContent}
       />
       <Component {...pageProps} />
-      <footer className="bg-neutral-50 border-t border-neutral-200">
+      <footer className='mt-5'>
         <div>
           <S3ComponentLoader
-            className="container mx-auto px-5"
+            className="empty"
             content={pageProps.footerContent}
           />{' '}
         </div>
