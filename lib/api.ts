@@ -130,8 +130,6 @@ export function updateMarkdownLinks(
   markdown = markdown.replace(
     /^>\[!danger\].*(?:\n>(?:.*|\s*))*/gm,
     (match) => {
-      console.log('Обнаружен блок [!danger]:');
-      console.log(match);
       // Удаляем маркеры Markdown и лишние пробелы
       const content = match
         .replace(/^>\[!danger\]\s*/gm, '') // Удаляем маркер `>[!danger]`
@@ -150,9 +148,6 @@ export function updateMarkdownLinks(
         <div class="title">${title}</div>
         <p>${textContent}</p>
       </div>`;
-
-      console.log('Сформированный HTML:');
-      console.log(html);
 
       // Формируем HTML-структуру
       return `

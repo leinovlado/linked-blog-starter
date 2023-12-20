@@ -28,7 +28,6 @@ mySchema.tagNames.push('div');
 mySchema.attributes.div = ['className'];
 
 function processCustomMarkdownBlocks(node) {
-  // console.log(node);
   if (node.type === 'text' && node.value.startsWith('>[!')) {
     // Разделяем строку на части
     const parts = node.value.split(' ');
@@ -68,17 +67,9 @@ export async function markdownToHtml(
     const node = createNoteNode(post.title, post.content);
     linkNodeMapping[l] = node;
   }
-  console.log(chalk.blue('Исходный Markdown файл:'), markdown);
+
   const file = await unified()
     .use(remarkParse)
-    .use(() => {
-      return (tree) => {
-        console.log(
-          chalk.blue('1 После remarkParse:'),
-          JSON.stringify(tree, null, 2)
-        );
-      };
-    })
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
@@ -90,8 +81,6 @@ export async function markdownToHtml(
     })
     .use(rehypeStringify)
     .process(markdown);
-
-  console.log(chalk.blue('5 Итоговый HTML:'), file.toString());
 
   let htmlStr = file.toString();
   return htmlStr;
