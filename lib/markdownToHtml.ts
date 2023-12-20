@@ -27,31 +27,7 @@ const mySchema = { ...defaultSchema };
 mySchema.tagNames.push('div');
 mySchema.attributes.div = ['className'];
 
-function processCustomMarkdownBlocks(node) {
-  if (node.type === 'text' && node.value.startsWith('>[!')) {
-    // Разделяем строку на части
-    const parts = node.value.split(' ');
-    const tagType = parts[0].slice(2, -1); // Получаем тип тега: danger, info, tips
-    const title = parts.slice(1).join(' '); // Получаем остальную часть строки
 
-    // Создаем новый HTML-узел
-    return {
-      type: 'element',
-      tagName: 'div',
-      properties: { className: `custom-block ${tagType}` },
-      children: [
-        {
-          type: 'element',
-          tagName: 'div',
-          properties: { className: 'title' },
-          children: [{ type: 'text', value: title }],
-        },
-        // Добавьте дополнительные узлы по необходимости
-      ],
-    };
-  }
-  return node;
-}
 
 export async function markdownToHtml(
   markdown: string,
