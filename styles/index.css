@@ -213,10 +213,26 @@ a {
   margin-bottom: 0px !important;
 }
 
+
+
 a[href^="http"]:not([href*="вашдомен.com"])::after {
-  font-family: "Bootstrap Icons";
-  content: "🔗"; /* Код иконки external-link-alt */
-  font-size: 0.9rem;
+ display: inline-block;
+ position: relative;
+ top: 1em;
+ color: #68717a;
+  margin-left: 0.25rem;
+
+  font-family: bootstrap-icons !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+
+  vertical-align: -0.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\F142"; /* Код иконки external-link-alt */
+  font-size: 1rem;
   top: -5px;
   сolor: gray;
 }
