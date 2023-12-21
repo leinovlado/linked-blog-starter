@@ -91,8 +91,6 @@ export function updateMarkdownLinks(
   markdown: string,
   currSlug: string
 ) {
-  console.log('Входящий md file:');
-  console.log(markdown);
   // remove `.md` from links
   markdown = markdown.replaceAll(
     /(\[[^\[\]]+\]\([^\(\)]+)(\.md(?:#[^\)]*)?)(\))/g,
@@ -128,36 +126,42 @@ export function updateMarkdownLinks(
   );
 
   markdown = markdown.replace(
-    /^>\[!danger\].*(?:\n>(?:.*|\s*))*/gm,
-    (match) => {
-      // Удаляем маркеры Markdown и лишние пробелы
-      const content = match
-        .replace(/^>\[!danger\]\s*/gm, '') // Удаляем маркер `>[!danger]`
-        .replace(/^>\s*/gm, '') // Удаляем символы '>'
-        .trim();
+    /^>\[!(\w+)\]\s*(.*)\n(?:>(.*)\n?)*/gm,
+    (match, keyWord, firstLine, restOfText) => {
+      // Удаляем символы '>'
+      const contentLines = match
+        .split('\n')
+        .map((line) => line.replace(/^>\s?/, ''))
+        .join('\n');
 
-      console.log('Содержимое блока после удаления маркеров:');
-      console.log(content);
       // Разделяем содержимое на заголовок и текст
-      const [title, ...text] = content.split('\n');
-      const textContent = text.join(' ');
-
-      const html = `
-      <div class="outline danger">
-        <div class="icon"></div>
-        <div class="title">${title}</div>
-        <p>${textContent}</p>
-      </div>`;
-
+      const contentParts = contentLines.split('\n');
+      const title = contentParts.shift(); // Первая строка после удаления маркера
+      const textContent = contentParts.join('</p>\n<p>'); // Остальной текст, разделенный параграфами
+      console.log(textContent.length);
       // Формируем HTML-структуру
-      return `
-  <div class="outline danger">
-    <div class="icon"></div>
-    <div class="title">${title}</div>
-    <p>${textContent}</p>
-  </div>`;
+      if (textContent.length > 0) {
+        return `\n
+<div class="outline ${keyWord.toLowerCase()}">
+  <div class="title">${title.replace(/\[!(\w+)\]\s*/, '')}</div>
+  <p>${textContent}</p>
+</div>\n`;
+      } else {
+        return `\n
+<div class="outline ${keyWord.toLowerCase()}">
+  <div class="title">${title.replace(/\[!(\w+)\]\s*/, '')}</div>
+</div>\n`;
+      }
     }
   );
+
+  markdown = markdown.replace(/(\s[а-яА-ЯёЁ]{1,2})\s/g, '$1\u00A0');
+
+  const punctuation = [',', '!', '\\?', ':', ';', '\\)'];
+  punctuation.forEach((punct) => {
+    const regex = new RegExp(`\\s${punct}`, 'g');
+    markdown = markdown.replace(regex, punct);
+  });
 
   return markdown;
 }

@@ -3,7 +3,6 @@ type Props = {
   content: string
 }
 
-
 const NotePreview = ({ title, content }: Props) => {
   return (
     <span className="note-preview ">

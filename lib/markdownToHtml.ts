@@ -27,12 +27,11 @@ const mySchema = { ...defaultSchema };
 mySchema.tagNames.push('div');
 mySchema.attributes.div = ['className'];
 
-
-
 export async function markdownToHtml(
   markdown: string,
   currSlug: string
 ) {
+  headers = [];
   markdown = updateMarkdownLinks(markdown, currSlug);
 
   // get mapping of current links
@@ -46,6 +45,7 @@ export async function markdownToHtml(
 
   const file = await unified()
     .use(remarkParse)
+
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
@@ -55,11 +55,19 @@ export async function markdownToHtml(
       rewrite: async (node) =>
         rewriteLinkNodes(node, linkNodeMapping, currSlug),
     })
+    .use(rehypeRewrite, {
+      selector: 'h1, h2, h3, h4',
+      rewrite: async (node) => {
+        processHeaderNodes(node);
+      },
+    })
+
     .use(rehypeStringify)
     .process(markdown);
 
   let htmlStr = file.toString();
-  return htmlStr;
+
+  return { html: htmlStr, headers };
 }
 
 export function getMDExcerpt(markdown: string, length: number = 500) {
@@ -95,4 +103,67 @@ function rewriteLinkNodes(
       node.children = [anchorNode, noteCardNode];
     }
   }
+}
+
+// Функция для генерации уникальных ID для заголовков
+function generateId(text) {
+  const stripEmojis = (str) =>
+    str
+      .replace(
+        /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+        ''
+      )
+      .replace(/\s+/g, ' ')
+      .trim();
+
+  // Удаление эмодзи и их модификаторов
+  const withoutEmojis = stripEmojis(text);
+
+  // Замена пробелов на подчеркивания
+  const withUnderscores = withoutEmojis.replace(/\s+/g, '_');
+
+  // Приведение к нижнему регистру
+  return withUnderscores.toLowerCase();
+}
+
+// Массив для хранения информации о заголовках
+let headers = [];
+
+function processHeaderNodes(node) {
+  if (node.type === 'element' && /^h[1-4]$/.test(node.tagName)) {
+    // Поиск ссылки среди дочерних элементов
+    const linkNode = node.children.find(
+      (child) => child.type === 'element' && child.tagName === 'a'
+    );
+
+    let text, href;
+    if (linkNode) {
+      // Извлекаем текст и href из ссылки
+      href = linkNode.properties.href;
+      text = linkNode.children.find(
+        (child) => child.type === 'text'
+      )?.value;
+
+      console.log(`Найдена ссылка: ${href} в заголовке: ${text}`);
+    } else {
+      // Если ссылка отсутствует, извлекаем текст обычным способом
+      const textNode = node.children.find(
+        (child) => child.type === 'text'
+      );
+      text = textNode?.value;
+    }
+
+    if (text) {
+      const id = generateId(text);
+      node.properties.id = id; // Присваиваем ID узлу заголовка
+      headers.push({ level: node.tagName, id, text }); // Собираем информацию о заголовке
+    }
+  }
+}
+
+function debugNodes() {
+  return (tree, file, next) => {
+    console.log(this.data, JSON.stringify(tree, null, 2));
+    if (next) next();
+  };
 }

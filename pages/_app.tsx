@@ -1,8 +1,10 @@
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AppProps } from 'next/app';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/index.css';
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import S3ComponentLoader, {
   loadS3Content,
 } from '../components/misc/S3Loader';
@@ -28,7 +30,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         content={pageProps.navbarContent}
       />
       <Component {...pageProps} />
-      <footer className='mt-5'>
+      <footer className="mt-5">
         <div>
           <S3ComponentLoader
             className="empty"

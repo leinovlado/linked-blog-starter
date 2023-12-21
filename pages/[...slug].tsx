@@ -8,29 +8,31 @@ import PostSingle from '../components/blog/post-single'
 import Layout from '../components/misc/layout'
 import { NextSeo } from 'next-seo'
 
+
 type Items = {
   title: string,
   excerpt: string,
 }
 
 type Props = {
-  post: PostType
-  slug: string
-  backlinks: { [k: string]: Items }
-}
+  post: PostType;
+  slug: string;
+  dom_headers: any
+  backlinks: { [k: string]: Items };
+};
 
-export default function Post({ post, backlinks }: Props) {
-  const router = useRouter()
-  const description = post.excerpt.slice(0, 155)
+export default function Post({ post, backlinks, dom_headers }: Props) {
+  const router = useRouter();
+  const description = post.excerpt.slice(0, 155);
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />
+    return <ErrorPage statusCode={404} />;
   }
   return (
     <>
       {router.isFallback ? (
         <h1>Loading…</h1>
       ) : (
-        <Layout>
+        <Layout dom_headers={dom_headers}>
           <NextSeo
             title={post.title}
             description={description}
@@ -38,12 +40,16 @@ export default function Post({ post, backlinks }: Props) {
               title: post.title,
               description,
               type: 'article',
-              images: [{
-                url: (post.ogImage?.url) ? post.ogImage.url : "https://fleetingnotes.app/favicon/512.png",
-                width: (post.ogImage?.url) ? null: 512,
-                height: (post.ogImage?.url) ? null: 512,
-                type: null
-              }]
+              images: [
+                {
+                  url: post.ogImage?.url
+                    ? post.ogImage.url
+                    : 'https://fleetingnotes.app/favicon/512.png',
+                  width: post.ogImage?.url ? null : 512,
+                  height: post.ogImage?.url ? null : 512,
+                  type: null,
+                },
+              ],
             }}
           />
           <PostSingle
@@ -56,7 +62,7 @@ export default function Post({ post, backlinks }: Props) {
         </Layout>
       )}
     </>
-  )
+  );
 }
 
 type Params = {
@@ -77,7 +83,12 @@ export async function getStaticProps({ params }: Params) {
     'content',
     'ogImage',
   ])
-  const content = await markdownToHtml(post.content || '', slug)
+  const ast = await markdownToHtml(
+    post.content || '',
+    slug
+  );
+  const content = ast.html;
+  const dom_headers = ast.headers;
   const linkMapping = await getLinksMapping()
   const backlinks = Object.keys(linkMapping).filter(k => linkMapping[k].includes(post.slug) && k !== post.slug)
   const backlinkNodes = Object.fromEntries(await Promise.all(backlinks.map(async (slug) => {
@@ -91,6 +102,7 @@ export async function getStaticProps({ params }: Params) {
         ...post,
         content,
       },
+      dom_headers,
       backlinks: backlinkNodes,
     },
   }
@@ -104,7 +116,7 @@ export async function getStaticPaths() {
         params: {
           slug: post.slug.split(path.sep),
         },
-      } 
+      }
     }),
     fallback: false,
   }
