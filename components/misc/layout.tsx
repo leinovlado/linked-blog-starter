@@ -16,7 +16,6 @@ const Layout = ({ children, dom_headers }: Props) => {
       <div className="nav indexing-list position-fixed mx-5 p-2 pb-1 bg-light-subtle border border-primary rounded">
         <h4>Содержание и поиск</h4>
 
-
         <nav id="content_index" className="nav d-flex flex-column">
           <Scrollspy
             items={spytargets}
