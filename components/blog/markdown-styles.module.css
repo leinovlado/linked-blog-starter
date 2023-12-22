@@ -1,7 +1,7 @@
 /* https://github.com/sindresorhus/github-markdown-css */
 
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@300;400;500;600;700&display=swap");
 
 .markdown-body {
   -ms-text-size-adjust: 100%;
@@ -52,7 +52,6 @@
 
 .markdown-body a {
   background-color: transparent;
-  color: #0c4f9a;
   text-decoration: none;
 }
 
@@ -301,16 +300,32 @@
 
 .markdown-body blockquote {
   margin: 0;
-  padding: 0 1em;
-  color: #57606a;
-  border-left: 0.25em solid #d0d7de;
+  margin-top: 1rem;
+  padding: 1rem 1rem;
+  color: #000000;
+}
+
+.markdown-body blockquote {
+  position: relative;
+  /* Остальные стили элемента */
+}
+
+.markdown-body blockquote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.25em;
+  background: #000000;
+  border-radius: 0.125em; /* Половина ширины линии для полного закругления */
 }
 
 .markdown-body ul,
 .markdown-body ol {
   margin-top: 0;
   margin-bottom: 0;
-  padding-left: 2em;
+  padding-left: 1.25rem;
 }
 
 .markdown-body ol ol,
@@ -500,9 +515,8 @@
   display: block;
 }
 
-
 .markdown-body g-emoji {
-  font-family: 'Noto Emoji', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Noto Emoji", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1em;
   font-style: normal !important;
   font-weight: 400;

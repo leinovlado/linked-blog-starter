@@ -13,10 +13,12 @@ const Layout = ({ children, dom_headers }: Props) => {
   const [searching, setSearching] = useState(false);
   return (
     <div>
-      <div className="nav indexing-list position-fixed mx-5 p-2 pb-1 bg-light-subtle border border-primary rounded">
-        <h4>Содержание и поиск</h4>
-
-        <nav id="content_index" className="nav d-flex flex-column">
+      <div className="bg-md-light indexing-list position-fixed mx-md-5 p-2 pb-1 rounded">
+        {dom_headers[0] && <h4>Содержание и поиск</h4>}
+        <nav
+          id="content_index"
+          className="nav w-100 d-flex flex-column"
+        >
           <Scrollspy
             items={spytargets}
             currentClassName="disabled fw-medium text-black"
@@ -33,7 +35,7 @@ const Layout = ({ children, dom_headers }: Props) => {
             ))}
           </Scrollspy>
           <button
-            className="w-100 btn btn-outline-primary my-2"
+            className="btn btn-primary btn-md-outline-dark w-100"
             aria-label="Search"
             onClick={() => setSearching(!searching)}
             disabled={searching}

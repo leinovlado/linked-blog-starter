@@ -64,12 +64,12 @@ function PostSingle({
       </section>
       <div className="container mt-5">
         {Object.keys(backlinks).length > 0 && (
-          <>
+          <div className="col-lg-10 offset-lg-4 offset-xl-3 offset-xxl-0">
             <h3>Также статья упоминается в:</h3>
             <div className="row">
               <Backlinks backlinks={backlinks} />
             </div>
-          </>
+          </div>
         )}
       </div>
     </>

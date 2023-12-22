@@ -2,6 +2,8 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { AppProps } from 'next/app';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/index.css';
+import '../styles/mobile.scss';
+
 import { DefaultSeo } from 'next-seo';
 import SEO from '../next-seo.config';
 
@@ -11,8 +13,11 @@ import S3ComponentLoader, {
 
 MyApp.getInitialProps = async () => {
   // Загрузка содержимого навбара и футера из S3
+  // const navbarContent = await loadS3Content(
+  //   'https://storage.yandexcloud.net/master-strategy/nav.html'
+  // );
   const navbarContent = await loadS3Content(
-    'https://storage.yandexcloud.net/master-strategy/nav.html'
+    'http://127.0.0.1:5500/nav.html'
   );
   const footerContent = await loadS3Content(
     'https://storage.yandexcloud.net/master-strategy/footer.html'
@@ -24,6 +29,7 @@ MyApp.getInitialProps = async () => {
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <div className="debug"></div>
       <DefaultSeo></DefaultSeo>
       <S3ComponentLoader
         className="_"

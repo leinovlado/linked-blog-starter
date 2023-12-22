@@ -54,7 +54,6 @@ main {
 
 main > section {
   max-width: 800px;
-  margin: 0 200px 0 400px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -123,6 +122,8 @@ a {
 
 .indexing-list {
   width: 300px;
+  margin-left: 20px !important;
+  left: 0;
 }
 
 .post-preview-text {
@@ -201,11 +202,11 @@ a {
 }
 
 .danger > .title::before {
-  content: '\F46C';
+  content: "\F46C";
 }
 
 .example > .title::before {
-  content: '\F477';
+  content: "\F477";
 }
 
 .outline > p {
@@ -213,13 +214,12 @@ a {
   margin-bottom: 0px !important;
 }
 
-
-
-a[href^="http"]:not([href*="вашдомен.com"])::after {
- display: inline-block;
- position: relative;
- top: 1em;
- color: #68717a;
+a[href^="http"]:not([href*="http://psf.master-strategy.ru/"]):not([href*="https://master-strategy.ru/"])::after
+{
+  display: inline-block;
+  position: relative;
+  top: 1em;
+  color: #68717a;
   margin-left: 0.25rem;
 
   font-family: bootstrap-icons !important;
@@ -248,4 +248,15 @@ ul {
 ol > li::marker,
 ul > li::marker {
   color: #9d9d9d;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 800 !important;
+  a {
+    color: #000 !important;
+  }
 }

@@ -64,48 +64,54 @@ function Search({ visible, setVisible }) {
     setSearchResults(await res.json());
   }
 
-  return (<div
-    className={`search-box position-absolute top-0 h-100 pb-4 z-200 left-0 w-100 overflow-auto  ${
-      visible ? 'd-block' : 'd-none'
-    }`}
-  >
+  return (
     <div
-      ref={containerRef}
-      className="search-container mx-auto d-flex flex-wrap mt-2 px-2"
+      className={`search-box position-absolute top-0 h-100 pb-4 z-200 left-0 w-100 overflow-auto  ${
+        visible ? 'd-block' : 'd-none'
+      }`}
     >
-      {/* Search Bar */}
-      <div className="w-100 pt-5 mb-5">
-        <h4>Поиск по заметкам</h4>
-        <label className="form-label d-none" htmlFor="search">
-          Search
-        </label>
-        <div className="input-group mb-2">
-          <input
-            ref={inputRef}
-            id="search"
-            type="search"
-            className="form-control w-10 px-2 py-1"
-            placeholder="поиск по заметкам..."
-            onChange={handleChangeInput}
-          />
+      <div
+        ref={containerRef}
+        className="search-container mx-auto d-flex flex-wrap mt-2 px-2"
+      >
+        {/* Search Bar */}
+        <div className="w-100 pt-5 mb-5">
+          <h4>Поиск по заметкам</h4>
+          <label className="form-label d-none" htmlFor="search">
+            Search
+          </label>
+          <div className="input-group mb-2">
+            <input
+              ref={inputRef}
+              id="search"
+              type="search"
+              className="form-control w-10 px-2 py-1"
+              placeholder="поиск по заметкам..."
+              onChange={handleChangeInput}
+            />
+          </div>
+          <button
+            onClick={() => setVisible(false)}
+            className="btn btn-outline-dark"
+          >
+            Вернуться к чтению <Icon.ArrowReturnLeft />
+          </button>
         </div>
-        <span className='btn btn-outline-dark'>Вернуться к чтению <Icon.ArrowReturnLeft /></span>
+
+        {/* Search Results */}
+        {searchResults.map((res) => (
+          <PostPreview
+            key={res.item.slug}
+            title={res.item.title}
+            excerpt={res.item.excerpt}
+            slug={res.item.slug}
+            date={res.item.date}
+            author={res.item.author}
+          />
+        ))}
       </div>
-
-      {/* Search Results */}
-      {searchResults.map((res) => (
-        <PostPreview
-          key={res.item.slug}
-          title={res.item.title}
-          excerpt={res.item.excerpt}
-          slug={res.item.slug}
-          date={res.item.date}
-          author={res.item.author}
-        />
-      ))}
-
     </div>
-  </div>);
+  );
 }
 
 export default Search;
