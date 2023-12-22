@@ -13,12 +13,12 @@ import S3ComponentLoader, {
 
 MyApp.getInitialProps = async () => {
   // Загрузка содержимого навбара и футера из S3
-  // const navbarContent = await loadS3Content(
-  //   'https://storage.yandexcloud.net/master-strategy/nav.html'
-  // );
   const navbarContent = await loadS3Content(
-    'http://127.0.0.1:5500/nav.html'
+    'https://storage.yandexcloud.net/master-strategy/nav.html'
   );
+  // const navbarContent = await loadS3Content(
+  //   'http://127.0.0.1:5500/nav.html'
+  // );
   const footerContent = await loadS3Content(
     'https://storage.yandexcloud.net/master-strategy/footer.html'
   );
