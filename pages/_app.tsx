@@ -29,7 +29,6 @@ MyApp.getInitialProps = async () => {
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <div className="debug"></div>
       <DefaultSeo></DefaultSeo>
       <S3ComponentLoader
         className="_"
