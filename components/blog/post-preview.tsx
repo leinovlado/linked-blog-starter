@@ -26,11 +26,11 @@ const PostPreview = ({
   slug,
 }: Props) => {
   console.log(excerpt);
-            const postExcerpt = excerpt; // предполагается, что post.excerpt содержит текст
-            const truncatedText = truncateText(excerpt, 200);
+  const postExcerpt = excerpt; // предполагается, что post.excerpt содержит текст
+  const truncatedText = truncateText(excerpt, 200);
   return (
     <>
-      <article className="mt-3 pb-3 border-bottom">
+      <article className="mt-3 pb-3 w-100 border-bottom">
         <Link as={`/${slug}`} href="/[...slug]">
           <div>
             <header>
