@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import NotePreview from './note-preview';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Post from '../../pages/[...slug]';
 
@@ -24,15 +23,14 @@ function truncateText(text, maxLength) {
 // Пример использования
 
 const Backlinks = ({ backlinks }: Props) => {
-
   return (
     <>
       {Object.keys(backlinks).map((slug) => {
         const post = backlinks[slug];
-          const postExcerpt = post.excerpt; // предполагается, что post.excerpt содержит текст
-          const truncatedText = truncateText(postExcerpt, 200);
+        const postExcerpt = post.excerpt; // предполагается, что post.excerpt содержит текст
+        const truncatedText = truncateText(postExcerpt, 200);
         return (
-          <Card className="col-9 col-md-6 m-2">
+          <Card className="col-9 col-md-5 m-2">
             <Link
               as={slug}
               href="[...slug]"

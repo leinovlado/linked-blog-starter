@@ -144,7 +144,6 @@ function processHeaderNodes(node) {
         (child) => child.type === 'text'
       )?.value;
 
-      console.log(`Найдена ссылка: ${href} в заголовке: ${text}`);
     } else {
       // Если ссылка отсутствует, извлекаем текст обычным способом
       const textNode = node.children.find(
@@ -161,9 +160,4 @@ function processHeaderNodes(node) {
   }
 }
 
-function debugNodes() {
-  return (tree, file, next) => {
-    console.log(this.data, JSON.stringify(tree, null, 2));
-    if (next) next();
-  };
-}
+

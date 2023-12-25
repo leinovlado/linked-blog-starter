@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { getFilesRecursively } from './modules/find-files-recusively.mjs';
-import { getMDExcerpt } from './markdownToHtml';
+
 
 const mdDir = path.join(process.cwd(), process.env.COMMON_MD_DIR);
 
@@ -37,8 +37,12 @@ function parseFileToObj(pathToObj: string) {
   data['content'] = content;
 
   // modify obj
+  console.log('col1: \n \n', data['excerpt']);
   if (typeof data['excerpt'] === 'undefined') {
-    data['excerpt'] = getMDExcerpt(content, 500);
+    if (typeof data['description'] !== 'undefined') {
+    } else {
+      data['excerpt'] = '';
+    }
   }
   if (typeof data['title'] === 'undefined') {
     data['title'] = decodeURI(path.basename(pathToObj, '.md'));
@@ -78,6 +82,7 @@ export function getLinksMapping() {
     }
     linksMapping[slug] = linkSlugs;
   });
+
   return linksMapping;
 }
 
@@ -138,7 +143,6 @@ export function updateMarkdownLinks(
       const contentParts = contentLines.split('\n');
       const title = contentParts.shift(); // Первая строка после удаления маркера
       const textContent = contentParts.join('</p>\n<p>'); // Остальной текст, разделенный параграфами
-      console.log(textContent.length);
       // Формируем HTML-структуру
       if (textContent.length > 0) {
         return `\n
