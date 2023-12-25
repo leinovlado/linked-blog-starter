@@ -231,7 +231,7 @@ a[href^="http"]:not([href*="http://psf.master-strategy.ru/"]):not([href*="https:
   vertical-align: -0.125em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  content: "\F142"; /* Код иконки external-link-alt */
+  content: "\F144"; /* Код иконки external-link-alt */
   font-size: 1rem;
   top: -5px;
   сolor: gray;
