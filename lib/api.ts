@@ -37,7 +37,6 @@ function parseFileToObj(pathToObj: string) {
   data['content'] = content;
 
   // modify obj
-  console.log('col1: \n \n', data['excerpt']);
   if (typeof data['excerpt'] === 'undefined') {
     if (typeof data['description'] !== 'undefined') {
     } else {
